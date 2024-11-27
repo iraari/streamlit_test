@@ -6,3 +6,4 @@ streamlit
 streamlit_shap
 xgboost
 matplotlib
+ipython

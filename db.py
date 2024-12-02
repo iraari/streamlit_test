@@ -64,8 +64,6 @@ Here’s how it works:
 
 - Making Predictions: Once it’s trained, the model can then be used with new health records. When given the details of a new person, it checks the patterns in that person’s data and compares them with the patterns it has learned. If the data aligns closely with patterns seen in people with diabetes, the model predicts "1" (meaning the person likely has diabetes). If it doesn’t match those patterns, it predicts "0" (meaning the person likely does not have diabetes).
 
-- Confidence Level: The model in this study gives a confidence level, like saying there’s an 80% chance the person has diabetes. This helps understand how strongly the model "believes" in its prediction.
-
 In short, a machine learning model for diabetes prediction works by learning from many examples to find patterns, then uses those patterns to make educated guesses about new cases. This doesn’t replace a doctor's expertise but can serve as a helpful tool to support decision-making.
 
 
@@ -74,9 +72,9 @@ In short, a machine learning model for diabetes prediction works by learning fro
 
 There are different tools that help people understand why a machine learning model made a particular prediction. This study tests one of them called "SHAP".
 
-Think of SHAP as a way to "look inside" the model to see which factors were important in making its decision.
 Since machine learning models are often complex and don't explain themselves, SHAP steps in to solve this problem by giving each feature (such as blood pressure or age) a score, called a "SHAP value." 
 This score tells us how much that specific factor contributed to the final prediction.
+Think of SHAP as a way to "look inside" the model to see which factors were important in making its decision.
 
 
 ### Please proceed as following:
@@ -95,14 +93,14 @@ Thanks for agreeing to participate in this study!
 
 
 HighBP = st.selectbox(
-    'Do you have high blood pressure? 0 = no high BP, 1 = high',
+    'Do you have high blood pressure?',
      ("no", "yes"))
 #'You selected: ', HighBP
 HighBP_dict =  {"no": 0, "yes": 1}
 #st.write(f"key for value = {HighBP_dict.get(HighBP)}")
 
 HighChol = st.selectbox(
-    'Is yout cholesterol high? 0 = no high cholesterol, 1 = high cholesterol',
+    'Is yout cholesterol high?',
      ("no", "yes"))
 #'You selected: ', HighChol
 HighChol_dict =  {"no": 0, "yes": 1}
@@ -112,21 +110,21 @@ BMI = st.slider('What is your Body Mass Index?')  # 👈 this is a widget
 #st.write('your BMI ', BMI)
 
 HeartDiseaseorAttack = st.selectbox(
-    'Do you have coronary heart disease (CHD) or myocardial infarction (MI)? 0 = no, 1 = yes',
+    'Do you have coronary heart disease (CHD) or myocardial infarction (MI)?',
      ("no", "yes"))
 #'You are ', HeartDiseaseorAttack
 HeartDiseaseorAttack_dict =  {"no": 0, "yes": 1}
 #st.write(f"key for value = {HeartDiseaseorAttack_dict.get(HeartDiseaseorAttack)}")
 
 Veggies = st.selectbox(
-    'Do you consume Vegetables 1 or more times per day 0 = no 1 = yes',
+    'Do you consume vegetables 1 or more times per day?',
      ("no", "yes"))
-'You are ', Veggies
+# 'You are ', Veggies
 Veggies_dict =  {"no": 0, "yes": 1}
-st.write(f"key for value = {Veggies_dict.get(Veggies)}")
+# st.write(f"key for value = {Veggies_dict.get(Veggies)}")
 
 HvyAlcoholConsump = st.selectbox(
-    'Do you have more than 14 drinks per week (adult men) or more than 7 drinks per week (adult women)? 0 = no, 1 = yes',
+    'Do you have more than 14 drinks per week (men) or more than 7 drinks per week (women)?',
      ("no", "yes"))
 #'You are ', HvyAlcoholConsump
 HvyAlcoholConsump_dict =  {"no": 0, "yes": 1}
@@ -143,14 +141,14 @@ GenHlth_dict =  {"excellent": 1, "very good": 2, "good": 3, "fair": 4, "poor": 5
 #st.write('your PhysHlth ', PhysHlth)
 
 DiffWalk = st.selectbox(
-    'Do you have serious difficulty walking or climbing stairs? 0 = no 1 = yes',
+    'Do you have serious difficulty walking or climbing stairs?',
      ("no", "yes"))
 #'You selected: ', DiffWalk
 DiffWalk_dict =  {"no": 0, "yes": 1}
 #st.write(f"key for value = {DiffWalk_dict.get(DiffWalk)}")
 
 Sex = st.radio(
-        'What is your sex? 0 = female, 1 = male',
+        'Please select your sex:',
         ("female", "male"))
 #st.write(f"You are {Sex}")
 Sex_dict =  {"female": 0, "male": 1}
@@ -171,14 +169,14 @@ Age_dict = {"18 to 24 years (1)": 1, "25 to 29 years (2)": 2, "30 to 34 years (3
 
 Income = st.radio(
         'Please select your income range:',
-        ("Less than \$10,000 (1)", "\$10,000 to less than \$15,000 (2)", "\$15,000 to less than \$20,000 (3)", 
-         "\$20,000 to less than \$25,000 (4)", "\$25,000 to less than \$35,000 (5)", 
-         "\$35,000 to less than \$50,000 (6)", "\$50,000 to less than \$75,000 (7)", "\$75,000 or more (8)"))
+        ("less than \$10,000 (1)", "\$10,000 to \$15,000 (2)", "\$15,000 to \$20,000 (3)", 
+         "\$20,000 to \$25,000 (4)", "\$25,000 to \$35,000 (5)", 
+         "\$35,000 to \$50,000 (6)", "\$50,000 to \$75,000 (7)", "\$75,000 or more (8)"))
 #st.write(f"You make {Income}")
 
-Income_dict = {"Less than \$10,000 (1)": 1, "\$10,000 to less than \$15,000 (2)": 2, "\$15,000 to less than \$20,000 (3)": 3, 
-               "\$20,000 to less than \$25,000 (4)": 4, "\$25,000 to less than \$35,000 (5)": 5, 
-               "\$35,000 to less than \$50,000 (6)": 6, "\$50,000 to less than \$75,000 (7)": 7, 
+Income_dict = {"less than \$10,000 (1)": 1, "\$10,000 to \$15,000 (2)": 2, "\$15,000 to \$20,000 (3)": 3, 
+               "\$20,000 to \$25,000 (4)": 4, "\$25,000 to \$35,000 (5)": 5, 
+               "\$35,000 to \$50,000 (6)": 6, "\$50,000 to \$75,000 (7)": 7, 
                "\$75,000 or more (8)": 8}
 
 #st.write(f"key for value = {Income_dict.get(Income)}")
@@ -209,7 +207,7 @@ user = {'High_blood_pressure': float(HighBP_dict.get(HighBP)),
  'Age': float(Age_dict.get(Age)),
  'Income': float(Income_dict.get(Income))}
 
-
+st.write("Overview of your data:")
 df_user_show = pd.DataFrame([user_show])
 df_user_show_T = df_user_show.T.rename(columns={0: "User"})
 st.dataframe(df_user_show_T, height=420, width=450) 
